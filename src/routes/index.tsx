@@ -38,18 +38,16 @@ const services = [
 const igPosts = [p2, p5, p1, p6, p4, p3];
 
 function Home() {
-  const [active, setActive] = useState<typeof projects[number] | null>(null);
   return (
     <main className="min-h-screen bg-background text-foreground">
       <Nav />
       <Hero />
       <About />
-      <Projects onOpen={setActive} />
+      <Projects />
       <Services />
       <Instagram />
       <Contact />
       <Footer />
-      {active && <ProjectDialog project={active} onClose={() => setActive(null)} />}
     </main>
   );
 }
@@ -167,7 +165,7 @@ function About() {
   );
 }
 
-function Projects({ onOpen }: { onOpen: (p: typeof projects[number]) => void }) {
+function Projects() {
   return (
     <section id="proyectos" className="bg-secondary/40 border-y border-border">
       <div className="mx-auto max-w-[1600px] px-6 md:px-10 py-28 md:py-40">
@@ -185,9 +183,14 @@ function Projects({ onOpen }: { onOpen: (p: typeof projects[number]) => void }) 
             const layout = ["md:col-span-7", "md:col-span-5 md:mt-32", "md:col-span-5", "md:col-span-7 md:mt-24", "md:col-span-6", "md:col-span-6 md:mt-16"][i];
             const ratio = p.span === "tall" ? "aspect-[3/4]" : "aspect-[4/3]";
             return (
-              <button key={p.id} onClick={() => onOpen(p)} className={`group text-left ${layout}`}>
+              <Link
+                key={p.slug}
+                to="/projects/$slug"
+                params={{ slug: p.slug }}
+                className={`group text-left block ${layout}`}
+              >
                 <div className={`relative overflow-hidden bg-muted ${ratio}`}>
-                  <img src={p.img} alt={p.title} loading="lazy" width={1280} height={1600} className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105" />
+                  <img src={p.cover} alt={p.title} loading="lazy" width={1280} height={1600} className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105" />
                 </div>
                 <div className="mt-5 flex items-baseline justify-between gap-4">
                   <div className="min-w-0">
@@ -196,7 +199,7 @@ function Projects({ onOpen }: { onOpen: (p: typeof projects[number]) => void }) 
                   </div>
                   <span className="shrink-0 eyebrow">{p.year}</span>
                 </div>
-              </button>
+              </Link>
             );
           })}
         </div>
