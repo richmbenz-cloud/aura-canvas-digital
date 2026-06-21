@@ -99,7 +99,7 @@ export const projects: Project[] = [
       "Estudio lumínico de un pabellón con espejo de agua al atardecer.",
     description: [
       "Visualización conceptual desarrollada para presentación a cliente. El pabellón se concibe como un volumen flotante sobre un espejo de agua que duplica el cielo y suaviza el calor de la región.",
-      "El render explora el momento más sensible del día: la luz cálida resbalando sobre el chukum y reflejándose en el agua.",
+      "El render explora el momento más sensible del día: la luz cálida resbalando sobre el tarrajeo pulido y reflejándose en el agua.",
     ],
     images: [
       { src: p3, caption: "Render exterior, hora dorada." },
