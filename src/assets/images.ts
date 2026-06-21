@@ -4,6 +4,9 @@
 import h_src from "./hero.jpg?w=1920&format=webp&as=url";
 import h_set from "./hero.jpg?w=640;1024;1600;1920&format=webp&as=srcset";
 import h_thumb from "./hero.jpg?w=24&format=webp&blur=8&as=url";
+import h_mobile from "./hero.jpg?w=800&format=webp&as=url";
+import h_mobile_set from "./hero.jpg?w=480;640;800&format=webp&as=srcset";
+import h_desktop_set from "./hero.jpg?w=1024;1600;1920&format=webp&as=srcset";
 
 import a_src from "./about.jpg?w=1280&format=webp&as=url";
 import a_set from "./about.jpg?w=480;800;1280&format=webp&as=srcset";
@@ -42,6 +45,10 @@ export type ImgAsset = {
 };
 
 export const hero: ImgAsset = { src: h_src, srcSet: h_set, thumb: h_thumb, width: 1920, height: 1280 };
+export const heroPreload = {
+  mobile: { href: h_mobile, srcSet: h_mobile_set, sizes: "100vw" },
+  desktop: { href: h_src, srcSet: h_desktop_set, sizes: "100vw" },
+};
 export const about: ImgAsset = { src: a_src, srcSet: a_set, thumb: a_thumb, width: 1280, height: 1600 };
 export const p1: ImgAsset = { src: p1_src, srcSet: p1_set, thumb: p1_thumb, width: 1280, height: 1600 };
 export const p2: ImgAsset = { src: p2_src, srcSet: p2_set, thumb: p2_thumb, width: 1920, height: 1080 };

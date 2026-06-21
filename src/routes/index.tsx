@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { hero, about, p1, p2, p3, p4, p5, p6 } from "@/assets/images";
+import { hero, heroPreload, about, p1, p2, p3, p4, p5, p6 } from "@/assets/images";
 import { Picture } from "@/components/Picture";
 import { projects } from "@/lib/projects";
 
@@ -22,11 +22,26 @@ export const Route = createFileRoute("/")({
       {
         rel: "preload",
         as: "image",
-        href: hero.src,
-        imageSrcSet: hero.srcSet,
-        imageSizes: "100vw",
+        href: heroPreload.mobile.href,
+        imageSrcSet: heroPreload.mobile.srcSet,
+        imageSizes: heroPreload.mobile.sizes,
+        media: "(max-width: 767px)",
         fetchPriority: "high",
       } as React.LinkHTMLAttributes<HTMLLinkElement>,
+      {
+        rel: "preload",
+        as: "image",
+        href: heroPreload.desktop.href,
+        imageSrcSet: heroPreload.desktop.srcSet,
+        imageSizes: heroPreload.desktop.sizes,
+        media: "(min-width: 768px)",
+        fetchPriority: "high",
+      } as React.LinkHTMLAttributes<HTMLLinkElement>,
+    ],
+    scripts: [
+      {
+        children: `(function(){try{var c=navigator.connection;if(!c)return;var slow=c.saveData===true||/(^|-)2g$/.test(c.effectiveType||'');if(slow){document.querySelectorAll('link[rel="preload"][as="image"]').forEach(function(l){l.parentNode&&l.parentNode.removeChild(l);});}}catch(e){}})();`,
+      } as React.ScriptHTMLAttributes<HTMLScriptElement>,
     ],
   }),
   component: Home,
