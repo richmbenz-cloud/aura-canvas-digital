@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { getProject, projects } from "@/lib/projects";
+import { getProject, projects, type Project } from "@/lib/projects";
 
 export const Route = createFileRoute("/projects/$slug")({
   loader: ({ params }) => {
@@ -61,6 +61,7 @@ function ErrorProject({ reset }: { error: Error; reset: () => void }) {
 
 function ProjectDetail() {
   const { project } = Route.useLoaderData();
+  const p = project as Project;
   const idx = projects.findIndex((p) => p.slug === project.slug);
   const next = projects[(idx + 1) % projects.length];
 
@@ -77,26 +78,26 @@ function ProjectDetail() {
           <span className="eyebrow">{project.place}</span>
         </div>
         <h1 className="mt-8 font-serif text-6xl md:text-[9vw] leading-[0.92] tracking-tight max-w-[16ch]">
-          {project.title}
+          {p.title}
         </h1>
         <p className="mt-8 font-serif italic text-xl md:text-3xl text-stone max-w-3xl leading-snug">
-          {project.tagline}
+          {p.tagline}
         </p>
       </header>
 
-      <ProjectCarousel images={project.images} />
+      <ProjectCarousel images={p.images} />
 
       <section className="mx-auto max-w-[1600px] px-6 md:px-10 mt-24 md:mt-36 grid gap-16 md:gap-24 md:grid-cols-12">
         <div className="md:col-span-7">
           <p className="eyebrow">Memoria del proyecto</p>
           <div className="mt-8 space-y-6 font-serif text-2xl md:text-3xl leading-snug">
-            {project.description.map((para, i) => (
+            {p.description.map((para: string, i: number) => (
               <p key={i}>{para}</p>
             ))}
           </div>
 
           <dl className="mt-16 grid grid-cols-3 gap-6 border-t border-border pt-8 max-w-xl">
-            {project.facts.map((f) => (
+            {p.facts.map((f: { label: string; value: string }) => (
               <div key={f.label}>
                 <dt className="eyebrow">{f.label}</dt>
                 <dd className="mt-2 font-serif text-xl md:text-2xl">{f.value}</dd>
@@ -108,7 +109,7 @@ function ProjectDetail() {
         <aside className="md:col-span-4 md:col-start-9">
           <p className="eyebrow">Créditos</p>
           <ul className="mt-8 divide-y divide-border border-y border-border">
-            {project.credits.map((c) => (
+            {p.credits.map((c: { role: string; name: string }) => (
               <li key={c.role} className="py-4 flex items-baseline justify-between gap-6">
                 <span className="text-sm text-muted-foreground">{c.role}</span>
                 <span className="font-serif text-lg text-right">{c.name}</span>
