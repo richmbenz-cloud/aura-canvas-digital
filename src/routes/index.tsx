@@ -1,13 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import hero from "@/assets/hero.jpg";
-import about from "@/assets/about.jpg";
-import p2 from "@/assets/project-2.jpg";
-import p1 from "@/assets/project-1.jpg";
-import p3 from "@/assets/project-3.jpg";
-import p4 from "@/assets/project-4.jpg";
-import p5 from "@/assets/project-5.jpg";
-import p6 from "@/assets/project-6.jpg";
+import { hero, about, p1, p2, p3, p4, p5, p6 } from "@/assets/images";
+import { Picture } from "@/components/Picture";
 import { projects } from "@/lib/projects";
 
 export const Route = createFileRoute("/")({
@@ -21,8 +15,18 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:title", content: "Aura Studio Arq" },
       { property: "og:description", content: "Arquitectura, interiorismo y visualización contemporánea." },
-      { property: "og:image", content: hero },
-      { name: "twitter:image", content: hero },
+      { property: "og:image", content: hero.src },
+      { name: "twitter:image", content: hero.src },
+    ],
+    links: [
+      {
+        rel: "preload",
+        as: "image",
+        href: hero.src,
+        imageSrcSet: hero.srcSet,
+        imageSizes: "100vw",
+        fetchPriority: "high",
+      } as React.LinkHTMLAttributes<HTMLLinkElement>,
     ],
   }),
   component: Home,
@@ -98,7 +102,14 @@ function Nav() {
 function Hero() {
   return (
     <section id="top" className="relative h-[100svh] w-full overflow-hidden">
-      <img src={hero} alt="Interior arquitectónico contemporáneo en travertino" width={1920} height={1280} className="absolute inset-0 h-full w-full object-cover slow-zoom" />
+      <Picture
+        img={hero}
+        alt="Interior arquitectónico contemporáneo en travertino"
+        sizes="100vw"
+        eager
+        priority
+        className="absolute inset-0 h-full w-full slow-zoom"
+      />
       <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/40" />
       <div className="absolute inset-0 flex flex-col">
         <div className="flex-1" />
@@ -155,9 +166,12 @@ function About() {
           </dl>
         </div>
         <div className="md:col-span-5">
-          <div className="relative aspect-[4/5] overflow-hidden bg-muted">
-            <img src={about} alt="Detalle arquitectónico" loading="lazy" width={1280} height={1600} className="h-full w-full object-cover" />
-          </div>
+          <Picture
+            img={about}
+            alt="Detalle arquitectónico"
+            sizes="(min-width: 768px) 42vw, 100vw"
+            className="aspect-[4/5]"
+          />
           <p className="mt-4 text-xs text-muted-foreground tracking-wide">Detalle de obra — Casa Travertino, 2024</p>
         </div>
       </div>
@@ -189,9 +203,12 @@ function Projects() {
                 params={{ slug: p.slug }}
                 className={`group text-left block ${layout}`}
               >
-                <div className={`relative overflow-hidden bg-muted ${ratio}`}>
-                  <img src={p.cover} alt={p.title} loading="lazy" width={1280} height={1600} className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105" />
-                </div>
+                <Picture
+                  img={p.cover}
+                  alt={p.title}
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className={`${ratio} transition-transform duration-[1200ms] ease-out group-hover:scale-105`}
+                />
                 <div className="mt-5 flex items-baseline justify-between gap-4">
                   <div className="min-w-0">
                     <h3 className="font-serif text-2xl md:text-3xl truncate">{p.title}</h3>
@@ -252,7 +269,12 @@ function Instagram() {
         <div className="mt-14 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
           {igPosts.map((src, i) => (
             <a key={i} href="https://www.instagram.com/aura.studioarq/" target="_blank" rel="noreferrer" className="group relative aspect-square overflow-hidden bg-muted">
-              <img src={src} alt={`Publicación ${i + 1}`} loading="lazy" width={800} height={800} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <Picture
+                img={src}
+                alt={`Publicación ${i + 1}`}
+                sizes="(min-width: 1024px) 16vw, (min-width: 768px) 33vw, 50vw"
+                className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-110"
+              />
               <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/20 transition-colors" />
             </a>
           ))}

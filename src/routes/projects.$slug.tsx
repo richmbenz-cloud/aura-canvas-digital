@@ -2,6 +2,8 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { getProject, projects, type Project } from "@/lib/projects";
+import { Picture } from "@/components/Picture";
+import type { ImgAsset } from "@/assets/images";
 
 export const Route = createFileRoute("/projects/$slug")({
   loader: ({ params }) => {
@@ -21,8 +23,8 @@ export const Route = createFileRoute("/projects/$slug")({
         { name: "description", content: p.tagline },
         { property: "og:title", content: `${p.title} — Aura Studio Arq` },
         { property: "og:description", content: p.tagline },
-        { property: "og:image", content: p.cover },
-        { name: "twitter:image", content: p.cover },
+        { property: "og:image", content: p.cover.src },
+        { name: "twitter:image", content: p.cover.src },
         { name: "twitter:card", content: "summary_large_image" },
       ],
     };
@@ -157,7 +159,7 @@ function DetailNav() {
   );
 }
 
-function ProjectCarousel({ images }: { images: { src: string; caption?: string }[] }) {
+function ProjectCarousel({ images }: { images: { src: ImgAsset; caption?: string }[] }) {
   const [emblaRef, embla] = useEmblaCarousel({ loop: true, align: "center" });
   const [selected, setSelected] = useState(0);
 
@@ -180,16 +182,14 @@ function ProjectCarousel({ images }: { images: { src: string; caption?: string }
           {images.map((im, i) => (
             <div key={i} className="flex-[0_0_100%] min-w-0 px-6 md:px-10">
               <div className="mx-auto max-w-[1400px]">
-                <div className="relative bg-muted aspect-[4/3] md:aspect-[16/9] overflow-hidden">
-                  <img
-                    src={im.src}
-                    alt={im.caption ?? `Imagen ${i + 1}`}
-                    loading={i === 0 ? "eager" : "lazy"}
-                    width={1600}
-                    height={1000}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
+                <Picture
+                  img={im.src}
+                  alt={im.caption ?? `Imagen ${i + 1}`}
+                  eager={i === 0}
+                  priority={i === 0}
+                  sizes="(min-width: 1400px) 1400px, 100vw"
+                  className="aspect-[4/3] md:aspect-[16/9]"
+                />
               </div>
             </div>
           ))}
