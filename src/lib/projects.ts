@@ -38,10 +38,10 @@ export const projects: Project[] = [
       "El proyecto articula el habitar contemporáneo con la materialidad local: travertino sin pulir, concreto aparente, robles de la región. Cada decisión busca disolver la frontera entre arquitectura y paisaje.",
     ],
     images: [
-      { src: p1, caption: "Fachada poniente, atardecer." },
-      { src: hero, caption: "Sala principal en travertino." },
-      { src: about, caption: "Detalle de muros y piso de roble." },
-      { src: p5, caption: "Atrio de doble altura." },
+      { src: p1, caption: "Sala principal en travertino." },
+      { src: hero, caption: "Continuidad material hacia el comedor." },
+      { src: p4, caption: "Recámara principal en tonos crudos." },
+      { src: about, caption: "Paleta material del proyecto." },
     ],
     credits: [
       { role: "Arquitectura", name: "Aura Studio Arq" },
@@ -71,9 +71,9 @@ export const projects: Project[] = [
       "La isla central, monolítica, ordena el espacio. El despiece de los gabinetes oculta los electrodomésticos y convierte el muro en una superficie continua, casi escultórica.",
     ],
     images: [
-      { src: p2, caption: "Vista general hacia el ventanal." },
-      { src: p4, caption: "Detalle de carpintería en roble." },
+      { src: p2, caption: "Isla central en mármol calacatta." },
       { src: hero, caption: "Continuidad material con la sala." },
+      { src: p4, caption: "Detalle de carpintería en roble." },
     ],
     credits: [
       { role: "Diseño interior", name: "Aura Studio Arq" },
@@ -103,8 +103,9 @@ export const projects: Project[] = [
     ],
     images: [
       { src: p3, caption: "Sala principal bajo lucernario." },
-      { src: p5, caption: "Stand satélite en feria de arte." },
+      { src: p5, caption: "Stand satélite de la galería." },
       { src: p1, caption: "Zona de descanso y lectura." },
+      { src: about, caption: "Materiales y curaduría." },
     ],
     credits: [
       { role: "Diseño interior", name: "Aura Studio Arq" },
@@ -133,8 +134,9 @@ export const projects: Project[] = [
     ],
     images: [
       { src: p4, caption: "Recámara principal." },
-      { src: about, caption: "Estudio cromático." },
+      { src: hero, caption: "Sala adyacente en travertino." },
       { src: p2, caption: "Continuidad con áreas comunes." },
+      { src: about, caption: "Estudio cromático." },
     ],
     credits: [
       { role: "Diseño interior", name: "Aura Studio Arq" },
@@ -164,6 +166,7 @@ export const projects: Project[] = [
     images: [
       { src: p5, caption: "Frente principal del stand." },
       { src: hero, caption: "Sala de lectura adyacente." },
+      { src: p2, caption: "Mostrador en roble a medida." },
       { src: about, caption: "Paleta material del proyecto." },
     ],
     credits: [
@@ -192,9 +195,10 @@ export const projects: Project[] = [
       "El programa se resuelve en una planta libre con barra central, gabinetes laterales y un comedor privado al fondo.",
     ],
     images: [
-      { src: p6, caption: "Eje central con arcos." },
+      { src: p6, caption: "Eje central con arcos en microcemento." },
       { src: p2, caption: "Detalle de la barra." },
       { src: p4, caption: "Gabinete privado." },
+      { src: hero, caption: "Lounge contiguo." },
     ],
     credits: [
       { role: "Diseño interior", name: "Aura Studio Arq" },
