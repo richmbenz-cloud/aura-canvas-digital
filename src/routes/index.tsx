@@ -1,13 +1,14 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import hero from "@/assets/hero.jpg";
 import about from "@/assets/about.jpg";
-import p1 from "@/assets/project-1.jpg";
 import p2 from "@/assets/project-2.jpg";
+import p1 from "@/assets/project-1.jpg";
 import p3 from "@/assets/project-3.jpg";
 import p4 from "@/assets/project-4.jpg";
 import p5 from "@/assets/project-5.jpg";
 import p6 from "@/assets/project-6.jpg";
+import { projects } from "@/lib/projects";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,15 +28,6 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const projects = [
-  { id: 1, title: "Casa Travertino", year: "2024", place: "Valle de Bravo", tag: "Residencial", img: p1, span: "tall", desc: "Refugio de fin de semana sobre una pendiente arbolada. La masa pétrea ancla el paisaje mientras el volumen superior, revestido en madera, captura la última luz del día." },
-  { id: 2, title: "Cocina Roble", year: "2024", place: "Polanco", tag: "Interiorismo", img: p2, span: "wide", desc: "Reinterpretación de una cocina familiar a partir de carpintería en roble blanco, mármol calacatta y herrajes en bronce envejecido." },
-  { id: 3, title: "Pabellón Espejo", year: "2023", place: "Mérida", tag: "Visualización 3D", img: p3, span: "tall", desc: "Visualización conceptual de un pabellón con espejo de agua. Estudio lumínico al atardecer para presentación a cliente." },
-  { id: 4, title: "Casa Lino", year: "2023", place: "San Miguel", tag: "Interiorismo", img: p4, span: "wide", desc: "Recámara principal concebida como un retiro: texturas naturales, paleta cruda y carpintería integral que disuelve el almacenaje." },
-  { id: 5, title: "Atrio Luz", year: "2022", place: "CDMX", tag: "Arquitectura", img: p5, span: "tall", desc: "Intervención en un edificio existente. Una cuña vertical de luz acompaña al usuario en su recorrido entre niveles." },
-  { id: 6, title: "Bar Arcos", year: "2024", place: "Roma Norte", tag: "Comercial", img: p6, span: "wide", desc: "Bar de autor articulado por arcos sucesivos en micro-cemento. Iluminación escultórica y mobiliario hecho a medida." },
-];
-
 const services = [
   { n: "01", t: "Arquitectura", d: "Proyecto integral desde el concepto hasta la obra terminada. Vivienda, comercial y cultural." },
   { n: "02", t: "Diseño Interior", d: "Espacios habitados con carácter: paleta material, mobiliario a medida y curaduría editorial." },
@@ -46,18 +38,16 @@ const services = [
 const igPosts = [p2, p5, p1, p6, p4, p3];
 
 function Home() {
-  const [active, setActive] = useState<typeof projects[number] | null>(null);
   return (
     <main className="min-h-screen bg-background text-foreground">
       <Nav />
       <Hero />
       <About />
-      <Projects onOpen={setActive} />
+      <Projects />
       <Services />
       <Instagram />
       <Contact />
       <Footer />
-      {active && <ProjectDialog project={active} onClose={() => setActive(null)} />}
     </main>
   );
 }
@@ -175,7 +165,7 @@ function About() {
   );
 }
 
-function Projects({ onOpen }: { onOpen: (p: typeof projects[number]) => void }) {
+function Projects() {
   return (
     <section id="proyectos" className="bg-secondary/40 border-y border-border">
       <div className="mx-auto max-w-[1600px] px-6 md:px-10 py-28 md:py-40">
@@ -193,9 +183,14 @@ function Projects({ onOpen }: { onOpen: (p: typeof projects[number]) => void }) 
             const layout = ["md:col-span-7", "md:col-span-5 md:mt-32", "md:col-span-5", "md:col-span-7 md:mt-24", "md:col-span-6", "md:col-span-6 md:mt-16"][i];
             const ratio = p.span === "tall" ? "aspect-[3/4]" : "aspect-[4/3]";
             return (
-              <button key={p.id} onClick={() => onOpen(p)} className={`group text-left ${layout}`}>
+              <Link
+                key={p.slug}
+                to="/projects/$slug"
+                params={{ slug: p.slug }}
+                className={`group text-left block ${layout}`}
+              >
                 <div className={`relative overflow-hidden bg-muted ${ratio}`}>
-                  <img src={p.img} alt={p.title} loading="lazy" width={1280} height={1600} className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105" />
+                  <img src={p.cover} alt={p.title} loading="lazy" width={1280} height={1600} className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105" />
                 </div>
                 <div className="mt-5 flex items-baseline justify-between gap-4">
                   <div className="min-w-0">
@@ -204,7 +199,7 @@ function Projects({ onOpen }: { onOpen: (p: typeof projects[number]) => void }) 
                   </div>
                   <span className="shrink-0 eyebrow">{p.year}</span>
                 </div>
-              </button>
+              </Link>
             );
           })}
         </div>
@@ -356,28 +351,5 @@ function Footer() {
         </div>
       </div>
     </footer>
-  );
-}
-
-function ProjectDialog({ project, onClose }: { project: typeof projects[number]; onClose: () => void; }) {
-  return (
-    <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm overflow-y-auto reveal" onClick={onClose}>
-      <button onClick={onClose} className="fixed top-6 right-6 md:top-8 md:right-10 z-10 eyebrow bg-background/80 px-4 py-2 border border-border hover:bg-foreground hover:text-background transition-colors">
-        Cerrar ✕
-      </button>
-      <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-20 md:py-28" onClick={(e) => e.stopPropagation()}>
-        <div className="flex items-center gap-4">
-          <span className="eyebrow">{project.tag}</span>
-          <span className="h-px w-12 bg-foreground/30" />
-          <span className="eyebrow">{project.year}</span>
-        </div>
-        <h2 className="mt-6 font-serif text-5xl md:text-8xl leading-[0.95] tracking-tight">{project.title}</h2>
-        <p className="mt-4 text-muted-foreground">{project.place}</p>
-        <div className="mt-12 relative overflow-hidden bg-muted">
-          <img src={project.img} alt={project.title} width={1280} height={1600} className="w-full h-auto object-cover" />
-        </div>
-        <p className="mt-12 font-serif text-2xl md:text-3xl leading-snug max-w-3xl">{project.desc}</p>
-      </div>
-    </div>
   );
 }
