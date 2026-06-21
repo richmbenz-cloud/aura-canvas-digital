@@ -1,13 +1,14 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import hero from "@/assets/hero.jpg";
 import about from "@/assets/about.jpg";
-import p1 from "@/assets/project-1.jpg";
 import p2 from "@/assets/project-2.jpg";
+import p1 from "@/assets/project-1.jpg";
 import p3 from "@/assets/project-3.jpg";
 import p4 from "@/assets/project-4.jpg";
 import p5 from "@/assets/project-5.jpg";
 import p6 from "@/assets/project-6.jpg";
+import { projects } from "@/lib/projects";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -26,15 +27,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Home,
 });
-
-const projects = [
-  { id: 1, title: "Casa Travertino", year: "2024", place: "Valle de Bravo", tag: "Residencial", img: p1, span: "tall", desc: "Refugio de fin de semana sobre una pendiente arbolada. La masa pétrea ancla el paisaje mientras el volumen superior, revestido en madera, captura la última luz del día." },
-  { id: 2, title: "Cocina Roble", year: "2024", place: "Polanco", tag: "Interiorismo", img: p2, span: "wide", desc: "Reinterpretación de una cocina familiar a partir de carpintería en roble blanco, mármol calacatta y herrajes en bronce envejecido." },
-  { id: 3, title: "Pabellón Espejo", year: "2023", place: "Mérida", tag: "Visualización 3D", img: p3, span: "tall", desc: "Visualización conceptual de un pabellón con espejo de agua. Estudio lumínico al atardecer para presentación a cliente." },
-  { id: 4, title: "Casa Lino", year: "2023", place: "San Miguel", tag: "Interiorismo", img: p4, span: "wide", desc: "Recámara principal concebida como un retiro: texturas naturales, paleta cruda y carpintería integral que disuelve el almacenaje." },
-  { id: 5, title: "Atrio Luz", year: "2022", place: "CDMX", tag: "Arquitectura", img: p5, span: "tall", desc: "Intervención en un edificio existente. Una cuña vertical de luz acompaña al usuario en su recorrido entre niveles." },
-  { id: 6, title: "Bar Arcos", year: "2024", place: "Roma Norte", tag: "Comercial", img: p6, span: "wide", desc: "Bar de autor articulado por arcos sucesivos en micro-cemento. Iluminación escultórica y mobiliario hecho a medida." },
-];
 
 const services = [
   { n: "01", t: "Arquitectura", d: "Proyecto integral desde el concepto hasta la obra terminada. Vivienda, comercial y cultural." },
