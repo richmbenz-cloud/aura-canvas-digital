@@ -353,26 +353,3 @@ function Footer() {
     </footer>
   );
 }
-
-function ProjectDialog({ project, onClose }: { project: typeof projects[number]; onClose: () => void; }) {
-  return (
-    <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm overflow-y-auto reveal" onClick={onClose}>
-      <button onClick={onClose} className="fixed top-6 right-6 md:top-8 md:right-10 z-10 eyebrow bg-background/80 px-4 py-2 border border-border hover:bg-foreground hover:text-background transition-colors">
-        Cerrar ✕
-      </button>
-      <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-20 md:py-28" onClick={(e) => e.stopPropagation()}>
-        <div className="flex items-center gap-4">
-          <span className="eyebrow">{project.tag}</span>
-          <span className="h-px w-12 bg-foreground/30" />
-          <span className="eyebrow">{project.year}</span>
-        </div>
-        <h2 className="mt-6 font-serif text-5xl md:text-8xl leading-[0.95] tracking-tight">{project.title}</h2>
-        <p className="mt-4 text-muted-foreground">{project.place}</p>
-        <div className="mt-12 relative overflow-hidden bg-muted">
-          <img src={project.img} alt={project.title} width={1280} height={1600} className="w-full h-auto object-cover" />
-        </div>
-        <p className="mt-12 font-serif text-2xl md:text-3xl leading-snug max-w-3xl">{project.desc}</p>
-      </div>
-    </div>
-  );
-}
