@@ -103,7 +103,7 @@ function Hero() {
       <div className="absolute inset-0 flex flex-col">
         <div className="flex-1" />
         <div className="mx-auto w-full max-w-[1600px] px-6 md:px-10 pb-16 md:pb-24 text-white reveal">
-          <p className="eyebrow text-white/80 mb-6">Estudio · Ciudad de México</p>
+          <p className="eyebrow text-white/80 mb-6">Estudio · Lima, Perú</p>
           <h1 className="font-serif text-[10vw] md:text-[6.5vw] leading-[0.95] tracking-tight max-w-[14ch]">
             Arquitectura,<br />
             espacio y <em className="italic font-light">visión</em><br />
@@ -279,7 +279,7 @@ function Contact() {
             </div>
             <div>
               <p className="eyebrow">Estudio</p>
-              <p className="mt-2 font-serif text-2xl">Ciudad de México</p>
+              <p className="mt-2 font-serif text-2xl">Lima, Perú</p>
             </div>
             <div>
               <p className="eyebrow">Social</p>
@@ -333,7 +333,7 @@ function Footer() {
           </div>
           <div className="md:col-span-3">
             <p className="eyebrow text-background/60">Estudio</p>
-            <p className="mt-3 text-sm text-background/80">Ciudad de México<br />hola@aurastudioarq.com</p>
+            <p className="mt-3 text-sm text-background/80">Lima, Perú<br />hola@aurastudioarq.com</p>
           </div>
           <div className="md:col-span-3">
             <p className="eyebrow text-background/60">Navegación</p>
