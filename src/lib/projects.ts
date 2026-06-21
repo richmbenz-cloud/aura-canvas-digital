@@ -1,11 +1,4 @@
-import hero from "@/assets/hero.jpg";
-import about from "@/assets/about.jpg";
-import p1 from "@/assets/project-1.jpg";
-import p2 from "@/assets/project-2.jpg";
-import p3 from "@/assets/project-3.jpg";
-import p4 from "@/assets/project-4.jpg";
-import p5 from "@/assets/project-5.jpg";
-import p6 from "@/assets/project-6.jpg";
+import { hero, about, p1, p2, p3, p4, p5, p6, type ImgAsset } from "@/assets/images";
 
 export type Project = {
   slug: string;
@@ -13,11 +6,11 @@ export type Project = {
   year: string;
   place: string;
   tag: string;
-  cover: string;
+  cover: ImgAsset;
   span: "tall" | "wide";
   tagline: string;
   description: string[];
-  images: { src: string; caption?: string }[];
+  images: { src: ImgAsset; caption?: string }[];
   credits: { role: string; name: string }[];
   facts: { label: string; value: string }[];
 };
