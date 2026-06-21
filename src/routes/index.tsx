@@ -1,13 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import hero from "@/assets/hero.jpg";
-import about from "@/assets/about.jpg";
-import p2 from "@/assets/project-2.jpg";
-import p1 from "@/assets/project-1.jpg";
-import p3 from "@/assets/project-3.jpg";
-import p4 from "@/assets/project-4.jpg";
-import p5 from "@/assets/project-5.jpg";
-import p6 from "@/assets/project-6.jpg";
+import { hero, about, p1, p2, p3, p4, p5, p6 } from "@/assets/images";
+import { Picture } from "@/components/Picture";
 import { projects } from "@/lib/projects";
 
 export const Route = createFileRoute("/")({
@@ -21,8 +15,25 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:title", content: "Aura Studio Arq" },
       { property: "og:description", content: "Arquitectura, interiorismo y visualización contemporánea." },
-      { property: "og:image", content: hero },
-      { name: "twitter:image", content: hero },
+      { property: "og:image", content: hero.src },
+      { name: "twitter:image", content: hero.src },
+    ],
+  }),
+  head: () => ({
+    meta: [
+      { title: "Aura Studio Arq — Arquitectura, espacio y visión contemporánea" },
+      {
+        name: "description",
+        content:
+          "Estudio de arquitectura, interiorismo y visualización 3D. Portafolio de proyectos residenciales y comerciales con enfoque editorial y contemporáneo.",
+      },
+      { property: "og:title", content: "Aura Studio Arq" },
+      { property: "og:description", content: "Arquitectura, interiorismo y visualización contemporánea." },
+      { property: "og:image", content: hero.src },
+      { name: "twitter:image", content: hero.src },
+    ],
+    links: [
+      { rel: "preload", as: "image", href: hero.src, imagesrcset: hero.srcSet, imagesizes: "100vw", fetchpriority: "high" } as unknown as React.LinkHTMLAttributes<HTMLLinkElement>,
     ],
   }),
   component: Home,
